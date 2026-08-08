@@ -1,5 +1,144 @@
 # RELI Roadmap (Execution Plan v1)
 
+## Execution Status (2026-08-07)
+
+Current phase: Phase 6 complete
+
+Completed start actions:
+
+- Initialized Rust crate scaffold and module boundaries under src.
+- Added versioned protocol schema starters under docs/schemas/v1.
+- Added ADR workflow and template under docs/adr.
+- Added deterministic Viterbi and LDPC fixture datasets under docs/fixtures/v1.
+- Implemented phase0 validator CLI and validation module.
+- Added initial ADR drafts for boundary and scoring determinism policies.
+- Added CI workflow to enforce build, tests, and phase0 validation gate.
+- Added schema compatibility regression checker with compatible and breaking fixtures.
+- Added settlement monotonicity and payout-invariant test coverage.
+- Added worker lifecycle state machine with transition invariant tests.
+- Added cross-environment reproducibility matrix workflow (ubuntu and macos).
+- Accepted ADR-0001 and ADR-0002 with recorded review sign-off.
+- Added reproducibility tracking document and required command matrix.
+- Added algorithm plugin registry with 3 default profiles via one common decode interface.
+- Added worker execution pipeline producing candidate submissions and quality score reports.
+- Added SDK alpha state tracking, submission storage, and worker-run integration.
+- Added verifier validation for success and failure-path record checks.
+- Added settlement scoring integration from worker execution reports to payout shares.
+- Expanded deterministic fixture corpus with turbo profile and adversarial low-quality case.
+- Added verifier challenge-record validation for fabricated-output, low-quality, and replay-attack dispute paths.
+- Added deterministic submission attestation signing and verifier signature checks.
+- Added structured soft-evidence bundle format with verifier bundle-validation helpers.
+- Added end-to-end local integration flow test: requester -> worker -> verifier -> settlement.
+- Added contract-facing lifecycle simulator with CreateJob/Commit/Reveal/Verify/Finalize/Settle transitions.
+- Added staking gate checks and basic reputation updates in contract simulation.
+- Added deterministic contract event log model and event indexer state rebuild helpers.
+- Added contract-facing SDK bindings for local lifecycle simulation.
+- Added contract state/event schemas and validator coverage.
+- Added storage retention and durability profile for artifact plane operations.
+- Added challenge submission and resolution flow with dispute-state tracking.
+- Added slashing mechanics for accepted fraud challenges and rejected griefing challenges.
+- Added settlement guard that blocks payout while unresolved challenges remain.
+- Added false-positive dispute rate metric and challenge-resolution latency SLO check.
+- Added verifier-worker collusion heuristic over pass-ratio interaction history.
+- Added adversarial test coverage for challenge handling, slashing correctness, and collusion detection.
+- Added pilot baseline dataset profile and KPI targets for industrial vibration monitoring.
+- Added incident and rollback runbook for pilot operations.
+- Added pilot telemetry schema for latency, cost, reliability, and dispute metrics.
+- Added pilot comparison report template for baseline-vs-RELI outcome reporting.
+- Added pilot KPI assessment module with pass/fail gate logic and tests.
+- Added multi-vertical metric profile registry with compatibility checks and tests.
+- Added governance activation-delay simulation with rollback drill support and tests.
+- Added partner integration guide and onboarding API examples.
+- Added capacity benchmark evaluation module with scaling pass/fail checks and tests.
+- Added Phase 5 schemas for metric profiles, governance proposals, and benchmark reports.
+- Expanded validation gate coverage for all new Phase 5 schema artifacts.
+- Added Phase 6 launch-readiness assessment module with pass/fail blockers and tests.
+- Added launch readiness, tokenomics policy, compliance checklist, and security audit plan docs.
+- Added Phase 6 schemas for launch readiness reports, tokenomics policy, and compliance attestations.
+- Expanded validation gate coverage for all new Phase 6 schema artifacts.
+
+In progress:
+
+- CI matrix run evidence collection for macos and ubuntu jobs.
+- Preparing post-Phase-6 external audit/legal execution package.
+
+Next 14-day sprint goals:
+
+1. Execute external legal and jurisdiction reviews with retained counsel.
+2. Commission independent smart-contract and economic audits.
+3. Launch public bug bounty and publish remediation closure report.
+4. Complete canary-to-mainnet operational drills with partner participants.
+5. Capture CI matrix evidence artifacts for reproducibility closeout record.
+
+Sprint exit checks:
+
+- Cargo tests pass for settlement math and schema parsing.
+- Schema fixtures validate against v1 JSON schema set.
+- ADRs reviewed and accepted by architecture owners.
+- Command check: cargo run --bin validate_phase0 returns success.
+
+Phase 0 exit criteria status:
+
+1. Reproducible test runs across at least 2 machine environments: local Linux pass and CI matrix configured for ubuntu/macos; pending CI run artifact capture.
+2. Schema compatibility tests passing for upgrade and downgrade cases: complete.
+3. Design review sign-off for off-chain/on-chain boundary: complete via ADR-0001 acceptance.
+
+Phase 1 progress snapshot:
+
+1. Worker can process at least 3 algorithm profiles through shared interface: complete.
+2. Initial SDK support for job creation, state transitions, and submission retrieval: complete.
+3. Confidence and residual quality output emitted by worker execution pipeline: complete.
+4. Scoring and settlement integration tests from execution reports: complete.
+5. Verifier challenge-focused evidence validation and failure tests: complete.
+6. Artifact hash and signature verification in integration tests: complete.
+7. End-to-end local demo path via SDK/worker/verifier/settlement: complete.
+
+Phase 1 exit criteria status:
+
+1. End-to-end local flow from noisy input to candidate output works: complete.
+2. Worker can process at least 3 algorithm profiles via common interface: complete.
+3. Artifact hashes and signatures verify correctly in integration tests: complete.
+
+Phase 2 immediate kickoff targets:
+
+1. Define on-chain lifecycle state/event contract-facing data model.
+2. Add commit/reveal/finalize/settle simulation harness tied to current worker SDK.
+3. Mirror payout/accounting invariants between off-chain and contract-facing logic.
+
+Phase 2 exit criteria status:
+
+1. Full job lifecycle succeeds in local testnet-style simulation: complete.
+2. Payout math matches off-chain mirror checks: complete.
+3. Event logs rebuild final state deterministically: complete.
+
+Phase 3 exit criteria status:
+
+1. Simulated fraud/challenge scenarios trigger expected slashing outcomes: complete.
+2. False-positive dispute handling and griefing penalties are enforced in tests: complete.
+3. Challenge-processing latency SLO check is implemented and test-covered: complete.
+
+Phase 4 exit criteria status:
+
+1. Reliability improvement target and KPI gates are explicitly defined and test-evaluable: complete.
+2. Cost and latency competitiveness gates are modeled and reportable: complete.
+3. Incident response and rollback procedures are documented for pilot operations: complete.
+4. Pilot comparison report template and telemetry schema are in place: complete.
+
+Phase 5 exit criteria status:
+
+1. Multi-vertical metric profile registry and compatibility checks are implemented and test-covered: complete.
+2. Governance activation-delay and rollback drill simulation are implemented and test-covered: complete.
+3. Partner integration guide and onboarding API examples are published: complete.
+4. Capacity benchmark suite with scale-out pass/fail evaluation is implemented and test-covered: complete.
+5. Validation gate includes new Phase 5 schema artifacts: complete.
+
+Phase 6 exit criteria status:
+
+1. Launch-readiness gate logic is implemented and test-covered with explicit blocker reporting: complete.
+2. Launch policy artifacts (tokenomics, compliance checklist, security audit plan, launch readiness sequence) are documented: complete.
+3. Validation gate includes new Phase 6 schema artifacts (launch readiness, tokenomics policy, compliance attestation): complete.
+4. Governance emergency control expectations are codified in launch-readiness gates and documentation: complete.
+
 ## 1. Purpose
 
 This roadmap turns the RELI concept and technical specification into an execution plan with explicit deliverables, acceptance gates, metrics, and risk controls.
@@ -29,6 +168,7 @@ The schedule below is written in relative months from project start.
 4. Phase 3 (M8-M11): Verification, disputes, and slashing.
 5. Phase 4 (M11-M14): Vertical pilot and production hardening.
 6. Phase 5 (M14-M18): Scale-out, governance maturity, and broader launch.
+7. Phase 6 (M18-M22): Launch readiness, compliance package, and staged mainnet go-live controls.
 
 ## 4. Phase-by-Phase Plan
 
@@ -181,6 +321,31 @@ Exit Criteria:
 Go/No-Go Gate:
 
 - Go only if governance reliability and integration readiness are proven.
+
+## 4.7 Phase 6: Launch Readiness and Staged Mainnet Go-Live (M18-M22)
+
+Objectives:
+
+- Finalize launch gates across legal, security, governance, and operations.
+- Encode launch-blocker logic in deterministic readiness checks.
+- Publish auditable launch artifacts for partner and committee review.
+
+Deliverables:
+
+- Launch-readiness gate module with explicit blocker output and score.
+- Launch readiness plan, tokenomics policy draft, and compliance checklist docs.
+- Security and economic audit planning package.
+- Versioned schemas for launch readiness reports and compliance attestations.
+
+Exit Criteria:
+
+- Launch-readiness logic and tests are green in CI.
+- Launch policy and compliance documentation are complete and reviewable.
+- Phase validator covers launch-readiness and compliance schemas.
+
+Go/No-Go Gate:
+
+- Go only if all launch blockers evaluate as cleared and all readiness artifacts pass validation.
 
 ## 5. Workstreams and Owners
 

@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:reli:schema:v1:challenge_record",
+  "title": "ChallengeRecordV1",
+  "type": "object",
+  "required": [
+    "challenge_id",
+    "submission_id",
+    "challenger_id",
+    "challenge_type",
+    "reason",
+    "challenger_signature"
+  ],
+  "properties": {
+    "challenge_id": { "type": "string", "minLength": 1 },
+    "submission_id": { "type": "string", "minLength": 1 },
+    "challenger_id": { "type": "string", "minLength": 1 },
+    "challenge_type": {
+      "type": "string",
+      "enum": ["fabricated_output", "low_quality", "replay_attack"]
+    },
+    "reason": { "type": "string", "minLength": 8 },
+    "observed_residual_score": {
+      "anyOf": [
+        { "type": "number", "minimum": 0, "maximum": 1 },
+        { "type": "null" }
+      ]
+    },
+    "min_required_quality": {
+      "anyOf": [
+        { "type": "number", "minimum": 0, "maximum": 1 },
+        { "type": "null" }
+      ]
+    },
+    "dispute_proof_ref": {
+      "anyOf": [
+        {
+          "type": "object",
+          "required": ["algorithm", "digest_hex"],
+          "properties": {
+            "algorithm": { "type": "string", "minLength": 1 },
+            "digest_hex": { "type": "string", "minLength": 1 }
+          },
+          "additionalProperties": false
+        },
+        { "type": "null" }
+      ]
+    },
+    "replay_of_submission_id": {
+      "anyOf": [
+        { "type": "string", "minLength": 1 },
+        { "type": "null" }
+      ]
+    },
+    "challenger_signature": {
+      "type": "object",
+      "required": ["signer_id", "signature_hex", "key_id"],
+      "properties": {
+        "signer_id": { "type": "string", "minLength": 1 },
+        "signature_hex": { "type": "string", "minLength": 1 },
+        "key_id": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

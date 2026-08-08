@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:reli:schema:v1:compliance_attestation",
+  "title": "ComplianceAttestationV1",
+  "type": "object",
+  "required": [
+    "jurisdiction",
+    "legal_opinion_complete",
+    "aml_kyc_policy_complete",
+    "sanctions_screening_complete",
+    "privacy_policy_complete",
+    "reporting_controls_complete"
+  ],
+  "properties": {
+    "jurisdiction": { "type": "string", "minLength": 1 },
+    "legal_opinion_complete": { "type": "boolean" },
+    "aml_kyc_policy_complete": { "type": "boolean" },
+    "sanctions_screening_complete": { "type": "boolean" },
+    "privacy_policy_complete": { "type": "boolean" },
+    "reporting_controls_complete": { "type": "boolean" }
+  },
+  "additionalProperties": false
+}

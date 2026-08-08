@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:reli:schema:v1:verification_record",
+  "title": "VerificationRecordV1",
+  "type": "object",
+  "required": [
+    "submission_id",
+    "verifier_id",
+    "checks_performed",
+    "check_result",
+    "verifier_signature"
+  ],
+  "properties": {
+    "submission_id": { "type": "string", "minLength": 1 },
+    "verifier_id": { "type": "string", "minLength": 1 },
+    "checks_performed": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "minItems": 1
+    },
+    "check_result": { "type": "string", "enum": ["pass", "fail", "inconclusive"] },
+    "dispute_proof_ref": {
+      "anyOf": [
+        {
+          "type": "object",
+          "required": ["algorithm", "digest_hex"],
+          "properties": {
+            "algorithm": { "type": "string", "minLength": 1 },
+            "digest_hex": { "type": "string", "minLength": 1 }
+          },
+          "additionalProperties": false
+        },
+        { "type": "null" }
+      ]
+    },
+    "verifier_signature": {
+      "type": "object",
+      "required": ["signer_id", "signature_hex", "key_id"],
+      "properties": {
+        "signer_id": { "type": "string", "minLength": 1 },
+        "signature_hex": { "type": "string", "minLength": 1 },
+        "key_id": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

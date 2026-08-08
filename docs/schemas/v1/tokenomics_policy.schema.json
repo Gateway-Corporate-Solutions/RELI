@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:reli:schema:v1:tokenomics_policy",
+  "title": "TokenomicsPolicyV1",
+  "type": "object",
+  "required": [
+    "version",
+    "genesis_supply",
+    "staking_required",
+    "slashing_enabled",
+    "governance_activation_delay_epochs"
+  ],
+  "properties": {
+    "version": { "type": "string", "minLength": 1 },
+    "genesis_supply": { "type": "integer", "minimum": 1 },
+    "staking_required": { "type": "boolean" },
+    "slashing_enabled": { "type": "boolean" },
+    "governance_activation_delay_epochs": { "type": "integer", "minimum": 0 }
+  },
+  "additionalProperties": false
+}

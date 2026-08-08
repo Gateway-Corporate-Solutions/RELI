@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:reli:schema:v1:job_spec",
+  "title": "JobSpecV1",
+  "type": "object",
+  "required": [
+    "job_id",
+    "requester",
+    "input_ref",
+    "input_schema",
+    "algorithm_profile",
+    "metric_profile",
+    "min_worker_stake",
+    "reward_pool",
+    "commit_deadline_epoch_ms",
+    "reveal_deadline_epoch_ms",
+    "verify_deadline_epoch_ms",
+    "finalize_deadline_epoch_ms",
+    "privacy_mode"
+  ],
+  "properties": {
+    "job_id": { "type": "string", "minLength": 1 },
+    "requester": { "type": "string", "minLength": 1 },
+    "input_ref": {
+      "type": "object",
+      "required": ["algorithm", "digest_hex"],
+      "properties": {
+        "algorithm": { "type": "string", "minLength": 1 },
+        "digest_hex": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "input_schema": { "type": "string", "minLength": 1 },
+    "algorithm_profile": { "type": "string", "minLength": 1 },
+    "metric_profile": { "type": "string", "minLength": 1 },
+    "min_worker_stake": { "type": "integer", "minimum": 0 },
+    "reward_pool": { "type": "integer", "minimum": 0 },
+    "commit_deadline_epoch_ms": { "type": "integer", "minimum": 0 },
+    "reveal_deadline_epoch_ms": { "type": "integer", "minimum": 0 },
+    "verify_deadline_epoch_ms": { "type": "integer", "minimum": 0 },
+    "finalize_deadline_epoch_ms": { "type": "integer", "minimum": 0 },
+    "privacy_mode": { "type": "string", "enum": ["public", "restricted", "encrypted"] }
+  },
+  "additionalProperties": false
+}

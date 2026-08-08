@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:reli:schema:v1:candidate_submission",
+  "title": "CandidateSubmissionV1",
+  "type": "object",
+  "required": [
+    "job_id",
+    "worker_id",
+    "output_ref",
+    "output_summary_hash",
+    "soft_evidence_ref",
+    "algorithm_execution_hash",
+    "worker_signature"
+  ],
+  "properties": {
+    "job_id": { "type": "string", "minLength": 1 },
+    "worker_id": { "type": "string", "minLength": 1 },
+    "output_ref": { "$ref": "#/$defs/hash_ref" },
+    "output_summary_hash": { "$ref": "#/$defs/hash_ref" },
+    "soft_evidence_ref": { "$ref": "#/$defs/hash_ref" },
+    "algorithm_execution_hash": { "$ref": "#/$defs/hash_ref" },
+    "worker_signature": { "$ref": "#/$defs/signature_envelope" }
+  },
+  "$defs": {
+    "hash_ref": {
+      "type": "object",
+      "required": ["algorithm", "digest_hex"],
+      "properties": {
+        "algorithm": { "type": "string", "minLength": 1 },
+        "digest_hex": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "signature_envelope": {
+      "type": "object",
+      "required": ["signer_id", "signature_hex", "key_id"],
+      "properties": {
+        "signer_id": { "type": "string", "minLength": 1 },
+        "signature_hex": { "type": "string", "minLength": 1 },
+        "key_id": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:reli:schema:v1:contract_event",
+  "title": "ContractEventV1",
+  "type": "object",
+  "required": ["seq", "job_id", "kind", "actor_id", "details"],
+  "properties": {
+    "seq": { "type": "integer", "minimum": 1 },
+    "job_id": { "type": "string", "minLength": 1 },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "JobCreated",
+        "CommitOpened",
+        "SubmissionCommitted",
+        "RevealOpened",
+        "SubmissionRevealed",
+        "VerifyOpened",
+        "VerificationRecorded",
+        "ChallengeSubmitted",
+        "ChallengeResolved",
+        "StakeSlashed",
+        "JobFinalized",
+        "JobSettled",
+        "ReputationUpdated"
+      ]
+    },
+    "actor_id": { "type": "string", "minLength": 1 },
+    "details": { "type": "string" }
+  },
+  "additionalProperties": false
+}

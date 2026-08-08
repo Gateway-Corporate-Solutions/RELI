@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:reli:schema:v1:soft_evidence_bundle",
+  "title": "SoftEvidenceBundleV1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "algorithm_id",
+    "profile_id",
+    "confidence_score",
+    "residual_score",
+    "notes"
+  ],
+  "properties": {
+    "schema_version": { "type": "string", "const": "1.0.0" },
+    "algorithm_id": { "type": "string", "minLength": 1 },
+    "profile_id": { "type": "string", "minLength": 1 },
+    "confidence_score": { "type": "number", "minimum": 0, "maximum": 1 },
+    "residual_score": { "type": "number", "minimum": 0, "maximum": 1 },
+    "notes": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    }
+  },
+  "additionalProperties": false
+}

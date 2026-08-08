@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:reli:schema:v1:capacity_benchmark_report",
+  "title": "CapacityBenchmarkReportV1",
+  "type": "object",
+  "required": [
+    "profile_id",
+    "samples",
+    "max_throughput_jps",
+    "p50_throughput_jps",
+    "scaling_efficiency",
+    "passes_scale_target"
+  ],
+  "properties": {
+    "profile_id": { "type": "string", "minLength": 1 },
+    "samples": { "type": "integer", "minimum": 1 },
+    "max_throughput_jps": { "type": "number", "minimum": 0 },
+    "p50_throughput_jps": { "type": "number", "minimum": 0 },
+    "scaling_efficiency": { "type": "number", "minimum": 0 },
+    "passes_scale_target": { "type": "boolean" }
+  },
+  "additionalProperties": false
+}

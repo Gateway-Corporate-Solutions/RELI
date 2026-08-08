@@ -1,0 +1,17 @@
+{
+  "fixture_id": "viterbi-basic-bsc-0001",
+  "schema_version": "1.0.0",
+  "algorithm_profile": "viterbi-basic-bsc",
+  "noise_model": "binary-symmetric-channel",
+  "input_payload_hex": "0101101010010110",
+  "input_payload_hash": {
+    "algorithm": "sha256",
+    "digest_hex": "f9c7cb7e9e7e2b83ec58366ff8452b7ca48bce8c8572a2d5c4f1e5262af5d72b"
+  },
+  "expected_output_hex": "0101001010010110",
+  "expected_output_hash": {
+    "algorithm": "sha256",
+    "digest_hex": "a3bb5b68f1e8c0ddafcd5ce5f4ac79cd5c6cf41f2d6bf4bb4b72d0fbb2d66f6d"
+  },
+  "expected_residual_score": 0.125
+}

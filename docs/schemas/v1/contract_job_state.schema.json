@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:reli:schema:v1:contract_job_state",
+  "title": "ContractJobStateV1",
+  "type": "object",
+  "required": ["job_id", "state", "min_worker_stake", "reward_pool"],
+  "properties": {
+    "job_id": { "type": "string", "minLength": 1 },
+    "state": {
+      "type": "string",
+      "enum": ["Created", "CommitOpen", "RevealOpen", "VerifyOpen", "Finalized", "Settled"]
+    },
+    "min_worker_stake": { "type": "integer", "minimum": 0 },
+    "reward_pool": { "type": "integer", "minimum": 0 },
+    "verification_pass_count": { "type": "integer", "minimum": 0 }
+  },
+  "additionalProperties": false
+}

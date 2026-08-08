@@ -1,107 +1,92 @@
 # RELI: Reliability Token Network
 
-RELI is a proposed decentralized reliability marketplace where participants pay for error-correction and sequence-reconstruction work on noisy real-world data, and worker nodes are rewarded for producing higher-confidence outputs.
+RELI is a Rust reference implementation of a reliability marketplace for noisy data workflows.
 
-The core computational primitives are classical decoding and estimation algorithms such as Viterbi, BCJR, turbo decoding, LDPC decoding, and sparse/structured recovery methods. The blockchain layer is used for coordination, attestation, incentives, and governance, not for heavy DSP execution.
+The system uses off-chain workers for decoding and reconstruction, plus contract-facing lifecycle simulation for coordination, verification, dispute handling, and settlement. The goal is measurable reliability improvement with auditable economics.
 
-## Vision
+## What RELI Solves
 
-Noisy data is everywhere: industrial sensors, wireless links, autonomous systems, biomedical streams, satellite telemetry, and logistics tracking. RELI aims to make reliability itself a measurable and tradable commodity:
+Many noisy-data pipelines are centralized and hard to audit end-to-end. RELI provides:
 
-1. Noisy observations are submitted.
-2. Independent workers reconstruct or denoise data off-chain.
-3. The network verifies and aggregates results.
-4. The requester receives attested, higher-confidence output.
-5. Rewards are distributed based on quality.
+- Deterministic, schema-driven artifact flow.
+- Multi-party verification and challenge handling.
+- Quality-linked payout and slashing logic.
+- Event-indexed lifecycle reconstruction for auditability.
 
-## Why This Exists
+## High-Level Architecture
 
-Centralized DSP services can clean data, but they often lack transparent provenance and incentive alignment across multiple untrusted contributors. RELI adds:
+1. Requester submits a job specification.
+2. Workers execute algorithm profiles off-chain and submit signed outputs.
+3. Verifiers validate submissions and evidence bundles.
+4. Challengers can dispute low-quality or fraudulent outcomes.
+5. Settlement computes quality-weighted rewards after lifecycle completion.
 
-- Tamper-evident audit trails for input/output artifacts.
-- Multi-party quality validation and dispute resolution.
-- Economic incentives tied to measurable reliability improvement.
-- Open algorithm governance and reproducible processing policies.
+Heavy compute stays off-chain. Contract-facing logic tracks state transitions, disputes, and payouts.
 
-## System Overview
+## Current Implementation Status
 
-RELI is designed around an off-chain compute + on-chain settlement architecture.
+The repository includes completed implementation through Phase 5:
 
-- Off-chain workers run computationally heavy decoding and reconstruction.
-- On-chain contracts coordinate jobs, attest outputs, settle payments, and update reputation.
-- Artifact storage keeps large payloads off-chain while preserving integrity using hashes and signed metadata.
+- Phase 0: schema foundation, compatibility checks, deterministic fixtures, artifact validator.
+- Phase 1: worker engine, algorithm registry, verifier and settlement integration, SDK alpha.
+- Phase 2: lifecycle simulation (create/commit/reveal/verify/finalize/settle), event model, payout mirror checks.
+- Phase 3: challenge workflow, slashing, latency SLO checks, collusion heuristics.
+- Phase 4: pilot KPI assessment, telemetry schema, incident runbook, pilot reporting templates.
+- Phase 5: multi-vertical profile registry, governance activation-delay and rollback simulation, scale benchmark suite, onboarding docs.
 
-High-level flow:
+## Repository Map
 
-1. Requester posts job metadata, reward budget, and acceptance policy.
-2. Workers stake participation and submit candidate outputs plus quality evidence.
-3. Verifiers or challengers evaluate results and may submit disputes.
-4. An aggregation rule picks a canonical reliability-weighted result.
-5. Token rewards and penalties are applied.
+- src/core: shared types, schema compatibility, attestation helpers, validation gate.
+- src/algorithms: decode profile interface and default profile registry.
+- src/worker: worker lifecycle and execution output models.
+- src/verifier: submission, signature, evidence, and challenge validation logic.
+- src/settlement: reliability scoring and reward share computation.
+- src/contracts: contract-facing lifecycle simulator, event stream, dispute and slashing flow.
+- src/sdk: requester and lifecycle client wrappers for integration flows.
+- src/pilot: pilot KPI threshold assessment.
+- src/registry: multi-vertical metric profile registry and compatibility checks.
+- src/governance: proposal scheduling with activation delays and rollback drills.
+- src/benchmarks: capacity benchmark evaluation and scaling-efficiency checks.
+- docs: protocol spec, architecture policy, roadmap, schemas, fixtures, ADRs, and operations docs.
 
-## Token Utility
+## Quick Start
 
-The RELI token is intended to have direct network utility:
+Prerequisites:
 
-- Payment for denoising and reconstruction jobs.
-- Staking collateral for worker participation.
-- Slashing for low-quality, malicious, or fraudulent submissions.
-- Governance voting on algorithm policies, quality thresholds, and data standards.
-- Reputation-linked credentials (for example, non-transferable reliability badges).
+- Rust toolchain (stable with Cargo)
 
-## Target Industries
+Run full tests:
 
-Strong fit domains include:
+```bash
+cargo test --locked
+```
 
-- Industrial IoT and predictive maintenance.
-- Wireless and edge communication recovery.
-- Autonomous vehicles, robotics, and drones.
-- Healthcare and biomedical sensing.
-- Environmental and climate monitoring.
-- Space and satellite data pipelines.
-- Audio and multimedia denoising.
-- Supply-chain and logistics telemetry.
+Run artifact and schema validation gate:
 
-## Rust-First Implementation Direction
+```bash
+cargo run --locked --bin validate_phase0
+```
 
-Rust is well-suited for RELI due to memory safety, performance, and concurrency ergonomics.
+Expected validator outcome: successful validation of all tracked artifacts and fixtures.
 
-Planned implementation priorities:
+## Key Documentation
 
-- Deterministic DSP kernels and test vectors.
-- SIMD/GPU-friendly decoding interfaces.
-- Strong type-safe protocol and job schemas.
-- Reproducible node behavior under adversarial inputs.
-
-## Repository Layout
-
-Current repository:
-
-- `README.md`: Project overview.
-- `docs/spec.md`: Technical design specification.
-- `src/`: Rust implementation area.
-
-## Project Status
-
-This project is currently in specification and architecture phase. The immediate objective is to validate a narrow pilot where measurable reliability gains can be demonstrated with auditable economics.
+- docs/spec.md: protocol-level technical specification.
+- docs/design.md: strict architecture policy and boundaries.
+- docs/roadmap.md: phased execution status and exit criteria.
+- docs/schemas/v1: canonical JSON schemas.
+- docs/fixtures/v1: deterministic fixture corpus.
+- docs/incident_runbook.md: pilot incident and rollback operations.
+- docs/integration_guide.md: partner integration workflow.
+- docs/onboarding_api_examples.md: onboarding-oriented Rust API sketches.
 
 ## Design Principles
 
-- Keep heavy compute off-chain.
-- Keep attestations and settlement on-chain.
-- Reward quality, not raw compute volume.
-- Make verification cheaper than primary computation whenever possible.
-- Prefer open standards and reproducible implementations.
-
-## Roadmap (Draft)
-
-1. Define canonical job/data schemas and reliability metrics.
-2. Implement baseline Rust decoder workers with deterministic fixtures.
-3. Build minimal marketplace contracts for job lifecycle and staking.
-4. Add verifier/challenger workflows and slashing.
-5. Run one vertical pilot (for example, industrial vibration or satellite packet recovery).
-6. Publish measured cost, latency, and reliability outcomes.
+- Keep compute-intensive decoding off-chain.
+- Keep coordination, attestation, and settlement deterministic and auditable.
+- Reward verified quality over raw compute volume.
+- Enforce schema contracts and reproducible validation at each phase gate.
 
 ## Disclaimer
 
-RELI is a systems and protocol concept. It is not investment advice. Real-world deployment in regulated or safety-critical domains requires legal, compliance, and domain-specific validation.
+RELI is a protocol and systems engineering project. It is not financial advice. Production use in regulated or safety-critical domains requires legal, compliance, and domain-specific validation.

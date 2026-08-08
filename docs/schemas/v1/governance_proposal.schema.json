@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:reli:schema:v1:governance_proposal",
+  "title": "GovernanceProposalV1",
+  "type": "object",
+  "required": [
+    "proposal_id",
+    "title",
+    "status",
+    "submitted_epoch",
+    "change"
+  ],
+  "properties": {
+    "proposal_id": { "type": "string", "minLength": 1 },
+    "title": { "type": "string", "minLength": 1 },
+    "status": {
+      "type": "string",
+      "enum": ["Proposed", "Scheduled", "Active", "RolledBack", "Rejected"]
+    },
+    "submitted_epoch": { "type": "integer", "minimum": 0 },
+    "activation_epoch": {
+      "anyOf": [
+        { "type": "integer", "minimum": 0 },
+        { "type": "null" }
+      ]
+    },
+    "change": {
+      "type": "object",
+      "required": ["key", "value", "rollback_value"],
+      "properties": {
+        "key": { "type": "string", "minLength": 1 },
+        "value": { "type": "number" },
+        "rollback_value": { "type": "number" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:reli:schema:v1:algorithm_fixture",
+  "title": "AlgorithmFixtureV1",
+  "type": "object",
+  "required": [
+    "fixture_id",
+    "schema_version",
+    "algorithm_profile",
+    "noise_model",
+    "input_payload_hash",
+    "expected_output_hash",
+    "expected_residual_score"
+  ],
+  "properties": {
+    "fixture_id": { "type": "string", "minLength": 1 },
+    "schema_version": { "type": "string", "minLength": 1 },
+    "algorithm_profile": { "type": "string", "minLength": 1 },
+    "noise_model": { "type": "string", "minLength": 1 },
+    "input_payload_hash": { "$ref": "#/$defs/hash_ref" },
+    "expected_output_hash": { "$ref": "#/$defs/hash_ref" },
+    "expected_residual_score": { "type": "number", "minimum": 0 },
+    "input_payload_hex": { "type": "string", "minLength": 1 },
+    "expected_output_hex": { "type": "string", "minLength": 1 },
+    "input_llr": {
+      "type": "array",
+      "items": { "type": "number" },
+      "minItems": 1
+    },
+    "expected_codeword_bits": {
+      "type": "array",
+      "items": { "type": "integer", "minimum": 0, "maximum": 1 },
+      "minItems": 1
+    },
+    "expected_iterations": { "type": "integer", "minimum": 0 }
+  },
+  "allOf": [
+    {
+      "anyOf": [
+        {
+          "required": ["input_payload_hex", "expected_output_hex"]
+        },
+        {
+          "required": ["input_llr", "expected_codeword_bits", "expected_iterations"]
+        }
+      ]
+    }
+  ],
+  "$defs": {
+    "hash_ref": {
+      "type": "object",
+      "required": ["algorithm", "digest_hex"],
+      "properties": {
+        "algorithm": { "type": "string", "minLength": 1 },
+        "digest_hex": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

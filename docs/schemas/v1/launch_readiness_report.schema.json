@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:reli:schema:v1:launch_readiness_report",
+  "title": "LaunchReadinessReportV1",
+  "type": "object",
+  "required": [
+    "ready",
+    "score_percent",
+    "blockers"
+  ],
+  "properties": {
+    "ready": { "type": "boolean" },
+    "score_percent": { "type": "number", "minimum": 0, "maximum": 100 },
+    "blockers": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    }
+  },
+  "additionalProperties": false
+}

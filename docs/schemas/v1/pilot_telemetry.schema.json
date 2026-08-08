@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:reli:schema:v1:pilot_telemetry",
+  "title": "PilotTelemetryV1",
+  "type": "object",
+  "required": [
+    "job_id",
+    "timestamp_utc",
+    "baseline_residual_error",
+    "reli_residual_error",
+    "baseline_cost_per_job",
+    "reli_cost_per_job",
+    "baseline_latency_ms",
+    "reli_latency_ms",
+    "critical_incident_count",
+    "challenges_submitted",
+    "challenges_accepted",
+    "challenges_rejected"
+  ],
+  "properties": {
+    "job_id": { "type": "string", "minLength": 1 },
+    "timestamp_utc": { "type": "string", "minLength": 20 },
+    "baseline_residual_error": { "type": "number", "minimum": 0 },
+    "reli_residual_error": { "type": "number", "minimum": 0 },
+    "baseline_cost_per_job": { "type": "number", "minimum": 0 },
+    "reli_cost_per_job": { "type": "number", "minimum": 0 },
+    "baseline_latency_ms": { "type": "integer", "minimum": 0 },
+    "reli_latency_ms": { "type": "integer", "minimum": 0 },
+    "critical_incident_count": { "type": "integer", "minimum": 0 },
+    "challenges_submitted": { "type": "integer", "minimum": 0 },
+    "challenges_accepted": { "type": "integer", "minimum": 0 },
+    "challenges_rejected": { "type": "integer", "minimum": 0 }
+  },
+  "additionalProperties": false
+}

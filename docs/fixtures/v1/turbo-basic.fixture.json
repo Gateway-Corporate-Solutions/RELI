@@ -1,0 +1,17 @@
+{
+  "fixture_id": "turbo-basic-0001",
+  "schema_version": "1.0.0",
+  "algorithm_profile": "turbo-basic",
+  "noise_model": "awgn",
+  "input_payload_hex": "a10ff3c409be7721",
+  "input_payload_hash": {
+    "algorithm": "sha256",
+    "digest_hex": "e3db0148e5d8736bb8e7e4ef94eb2ca4f7ea5d005f92a6f314fdbd8fd9da8c5a"
+  },
+  "expected_output_hex": "a50bf7c009ba7325",
+  "expected_output_hash": {
+    "algorithm": "sha256",
+    "digest_hex": "36b4e35603f1368f221e3f44f57fca6af947f11f853fbdb503038fd599a1ec4e"
+  },
+  "expected_residual_score": 0.08
+}

@@ -1,0 +1,18 @@
+{
+  "fixture_id": "ldpc-minsum-adversarial-lowquality-0001",
+  "schema_version": "1.0.0",
+  "algorithm_profile": "ldpc-minsum-basic",
+  "noise_model": "awgn-adversarial-burst",
+  "input_llr": [0.05, -0.04, 0.03, -0.02, 0.01, -0.01, 0.02, -0.03],
+  "input_payload_hash": {
+    "algorithm": "sha256",
+    "digest_hex": "8b3a73d130e9054037ec8d4dbad7304812c5a63a9bf1cabeb6f3cbc6f0c68f0f"
+  },
+  "expected_codeword_bits": [1, 1, 0, 0, 1, 0, 0, 1],
+  "expected_output_hash": {
+    "algorithm": "sha256",
+    "digest_hex": "02ecb2f6ba6c74e8d8f8e4d0b6e1db32a0a28153899014fd2643566973774358"
+  },
+  "expected_iterations": 12,
+  "expected_residual_score": 0.95
+}
